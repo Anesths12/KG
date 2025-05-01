@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Γνωρίστε την Ομάδα Μας | Premium Solutions</title>
+  <meta name="description" content="Η επαγγελματική μας ομάδα από την Κατερίνη. Ειδικοί σε ανάπτυξη ιστοσελίδων, σχεδιασμό και μάρκετινγκ.">
+  
+  <!-- Preload assets -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Roboto:wght@300;400;500;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <style>
+    :root {
+      --space-dark: #020024;
+      --space-blue: #090979;
+      --space-light: #00d4ff;
+      --text-primary: #f8f8ff;
+      --text-secondary: #d1d1ff;
+      --accent-color: #ff55a8;
+      --card-bg: rgba(9, 9, 121, 0.3);
+      --border-color: rgba(0, 212, 255, 0.3);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #000;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+    }
+    
+    .content {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      z-index: 10;
+      overflow: hidden;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center; /* Κεντράρισμα όλων των τίτλων */
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--text-primary);
+      text-shadow: 0 2px 10px rgba(0, 212, 255, 0.5);
+      margin-bottom: 1rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #fff, var(--space-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      font-weight: 300;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(0, 212, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+    }
+    
+    /* Team Section */
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      margin: 5rem 0;
+    }
+
+    .member {
+      background: linear-gradient(145deg, rgba(9, 9, 121, 0.4), rgba(0, 212, 255, 0.2));
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      width: 280px;
+      transition: var(--transition);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .member::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, rgba(0,212,255,0) 70%);
+      transform: rotate(45deg);
+      transition: var(--transition);
+      opacity: 0;
+    }
+    
+    .member:hover::before {
+      opacity: 1;
+    }
+
+    .member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+      border-color: var(--space-light);
+    }
+
+    .member-img-container {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+    
+    .member-img-border {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .member:nth-child(2) .member-img-border {
+      animation-delay: 0.5s;
+    }
+    
+    .member:nth-child(3) .member-img-border {
+      animation-delay: 1s;
+    }
+    
+    .member:nth-child(4) .member-img-border {
+      animation-delay: 1.5s;
+    }
+
+    .member img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      transition: var(--transition);
+      filter: grayscale(20%);
+    }
+    
+    .member:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .member h3 {
+      font-size: 1.6rem;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .member h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--space-blue), var(--space-light));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    
+    .member:hover h3::after {
+      transform: scaleX(1) translateX(-50%);
+      transform-origin: left;
+    }
+
+    .member p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      text-align: center;
+    }
+    
+    .position {
+      color: var(--accent-color);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: block;
+      text-align: center;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    
+    .social-links a {
+      color: var(--text-secondary);
+      font-size: 1.8rem;
+      transition: var(--transition);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+    
+    .social-links a:hover {
+      color: var(--space-light);
+      transform: translateY(-5px);
+      background: rgba(0, 212, 255, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    }
+    
+    /* Button Styles */
+    .btn-container {
+      text-align: center;
+      margin: 4rem 0;
+      position: relative;
+    }
+    
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(135deg, var(--space-blue), var(--space-light));
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 5px 25px rgba(0, 212, 255, 0.4);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--space-light), var(--space-blue));
+      z-index: -1;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 35px rgba(0, 212, 255, 0.6);
+    }
+    
+    .button:hover::before {
+      opacity: 1;
+    }
+    
+    .button .icon {
+      margin-left: 10px;
+      transition: transform 0.3s ease;
+    }
+    
+    .button:hover .icon {
+      transform: translateX(5px);
+    }
+    
+    .button.pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    <style>
+  /* Βιβλιογραφία Section */
+  .bibliography-section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  
+  .section-subtitle {
+    font-size: 1.5rem;
+    color: #00d4ff;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+  
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #090979, #00d4ff);
+    margin: 1rem auto;
+    border-radius: 3px;
+  }
+  
+  .section-description {
+    font-size: 1.1rem;
+    color: #d1d1ff;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .books-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .book-card {
+    width: 250px;
+    background: rgba(9, 9, 121, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+  }
+  
+  .book-cover {
+    height: 180px;
+    overflow: hidden;
+  }
+  
+  .book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .book-card:hover .book-cover img {
+    transform: scale(1.05);
+  }
+  
+  .book-info {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .book-info h4 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .author {
+    font-size: 0.95rem;
+    color: #d1d1ff;
+    font-style: italic;
+    margin-bottom: 0.3rem;
+  }
+  
+  .year {
+    font-size: 0.9rem;
+    color: #ff55a8;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .books-container {
+      gap: 1.5rem;
+    }
+    
+    .book-card {
+      width: 45%;
+      min-width: 200px;
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .book-card {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <canvas id="galaxy"></canvas>
+
+  <div class="content">
+    <h1 data-aos="fade-up">Γνωρίστε την Ομάδα Μας</h1>
+    <p class="subtitle" data-aos="fade-up" data-aos-delay="100">Το Site Αυτό Κατασκευάστηκε Με Πολύ Αγάπη Απο την Κατερίνη</p>
+
+    <div class="team-members">
+      <div class="member" data-aos="fade-up" data-aos-delay="200">
+        <div class="member-img-container">
+          <div class="member-img-border"></div>
+          <img src="https://i.postimg.cc/s2MfP4cX/x6kvw3djx1571.jpg" alt="Άτομο 1, Ιδρυτής και ειδικός ανάπτυξης ιστοσελίδων στην Κατερίνη">
+        </div>
+        <h3>Πουλιανίδης Αναστάσιος</h3>
+        <span class="position">οκ</span>
+        <p>οκ</p>
+      </div>
+      
+      <div class="member" data-aos="fade-up" data-aos-delay="300">
+        <div class="member-img-container">
+          <div class="member-img-border"></div>
+          <img src="https://i.postimg.cc/8z8XJQYk/team-member2.jpg" alt="Άτομο 2, Σχεδιαστής UX/UI">
+        </div>
+        <h3>Ευριπίδης Ραγκάτσης</h3>
+        <span class="position">οκ</span>
+        <p>οκ herbaLLLLLLLif</p>
+      </div>
+      
+      <div class="member" data-aos="fade-up" data-aos-delay="400">
+        <div class="member-img-container">
+          <div class="member-img-border"></div>
+          <img src="https://i.postimg.cc/3NkYbWPT/team-member3.jpg" alt="Άτομο 3, Ειδικός Ψηφιακού Μάρκετινγκ">
+        </div>
+        <h3>Σόνια Ρουσούδη</h3>
+        <span class="position">οκ</span>
+        <p>οκ</p>
+      </div>
+      
+      <div class="member" data-aos="fade-up" data-aos-delay="500">
+        <div class="member-img-container">
+          <div class="member-img-border"></div>
+          <img src="https://i.postimg.cc/8CJ3fK5Z/team-member4.jpg" alt="Άτομο 4, Υπεύθυνος Πωλήσεων">
+        </div>
+        <h3>Πόδας Αθανάσιος</h3>
+        <span class="position"></span>
+        <p>oκ</p>
+      </div>
+    </div>
+
+    <!--<div class="social-links" data-aos="fade-up" data-aos-delay="600">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </div> -->
+
+    <div class="btn-container" data-aos="fade-up" data-aos-delay="700">
+      <button class="button pulse" onclick="window.location.href='index.html'">
+        Επιστροφή στην Αρχική <span class="icon"><i class="fas fa-arrow-right"></i></span>
+      </button>
+    </div> 
+    
+ <!-- Βιβλιογραφία Section -->
+<section class="bibliography-section">
+    <div class="section-header">
+      <h2 class="section-title">Ένα Μεγάλο Ευχαριστώ</h2>
+      <h3 class="section-subtitle">Στη Βιβλιογραφία που Μας Βοήθησε</h3>
+      <div class="divider"></div>
+      <p class="section-description">Οι γνώσεις και οι τεχνικές που χρησιμοποιούμε βασίζονται σε επιστημονικά τεκμηριωμένες πηγές</p>
+    </div>
+    
+    <div class="books-container">
+      <!-- Βιβλίο 1 -->
+      <div class="book-card">
+        <div class="book-cover">
+          <img src="https://i.postimg.cc/Df9dDpVL/613-ZTDc-Dsi-L.jpg" alt="HTML & CSS Design">
+        </div>
+        <div class="book-info">
+          <h4>HTML & CSS Design</h4>
+          <p class="author">Τζον Ντάκετ</p>
+          <p class="year">2014 Edition</p>
+        </div>
+      </div>
+      
+      <!-- Βιβλίο 2 -->
+      <div class="book-card">
+        <div class="book-cover">
+          <img src="https://i.postimg.cc/XvTbY9dy/Gearon-HI.png" alt="Tiny CSS Projects">
+        </div>
+        <div class="book-info">
+          <h4>Tiny CSS Projects</h4>
+          <p class="author">Μ. Τζέρον & Μ. Ντάουντεν</p>
+          <p class="year">2023 Edition</p>
+        </div>
+      </div>
+      
+      <!-- Βιβλίο 3 -->
+      <div class="book-card">
+        <div class="book-cover">
+          <img src="https://i.postimg.cc/xTbF9Bgg/images.jpg" alt="CSS in Depth">
+        </div>
+        <div class="book-info">
+          <h4>CSS in Depth</h4>
+          <p class="author">Keith J. Grant</p>
+          <p class="year">2018 Edition</p>
+        </div>
+      </div>
+      
+      <!-- Βιβλίο 4 -->
+      <div class="book-card">
+        <div class="book-cover">
+          <img src="https://i.postimg.cc/QMPfLb5v/images-1.jpg" alt="CSS in Depth 2nd Ed">
+        </div>
+        <div class="book-info">
+          <h4>CSS in Depth (2nd Ed)</h4>
+          <p class="author">Keith J. Grant</p>
+          <p class="year">2021 Edition</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>        <!-- Htan polu oraia empeiria-->
+  <img src="fire_sword_transparent_optimized.gif" alt="Dark_Souls_3" style="display: block; margin: 40px auto; width: 250px;" />
+
+  <!-- JavaScript Libraries -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  
+  <script>
+    // Initialize AOS (Animate On Scroll)
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
+    });
+    
+    // Galaxy Animation
+    const canvas = document.getElementById("galaxy");
+    const ctx = canvas.getContext("2d");
+
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+
+    const starLayers = [
+      { count: 1200, speed: 1.5, size: 0.8, color: "#aaaaff" },
+      { count: 900, speed: 2.5, size: 1.2, color: "#ffffff" },
+      { count: 700, speed: 4, size: 1.8, color: "#ffddff" }
+    ];
+
+    let stars = [];
+
+    function generateStars() {
+      stars = [];
+      for (const layer of starLayers) {
+        for (let i = 0; i < layer.count; i++) {
+          stars.push({
+            x: (Math.random() - 0.5) * w * 4,
+            y: (Math.random() - 0.5) * h * 4,
+            z: Math.random() * w,
+            speed: layer.speed,
+            size: layer.size,
+            color: layer.color,
+            opacity: Math.random() * 0.8 + 0.2
+          });
+        }
+      }
+    }
+
+    function drawBackground() {
+      const g = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h));
+      g.addColorStop(0, "#000010");
+      g.addColorStop(0.5, "#000020");
+      g.addColorStop(1, "#000000");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    function drawStars() {
+      for (const star of stars) {
+        star.z -= star.speed;
+        if (star.z <= 0.1) {
+          star.z = w;
+          star.x = (Math.random() - 0.5) * w * 4;
+          star.y = (Math.random() - 0.5) * h * 4;
+          star.opacity = Math.random() * 0.8 + 0.2;
+        }
+
+        const k = 200 / star.z;
+        const sx = star.x * k + w / 2;
+        const sy = star.y * k + h / 2;
+        const size = star.size * (1 - star.z / w) * 2;
+
+        if (sx >= 0 && sx < w && sy >= 0 && sy < h) {
+          ctx.beginPath();
+          ctx.globalAlpha = star.opacity;
+          ctx.fillStyle = star.color;
+          ctx.arc(sx, sy, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // Optimized animation loop
+    let lastTime = 0;
+    const fps = 60;
+    const interval = 1000 / fps;
+
+    function optimizedDraw(timestamp) {
+      if (timestamp - lastTime >= interval) {
+        drawBackground();
+        drawStars();
+        lastTime = timestamp;
+      }
+      requestAnimationFrame(optimizedDraw);
+    }
+
+    // Initialize
+    generateStars();
+    requestAnimationFrame(optimizedDraw);
+
+    // Responsive handling
+    window.addEventListener("resize", () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+      generateStars();
+    });
+
+    // Add subtle animations to team members on hover
+    const members = document.querySelectorAll('.member');
+    members.forEach(member => {
+      member.addEventListener('mouseenter', () => {
+        gsap.to(member.querySelector('img'), { 
+          rotation: 2,
+          duration: 0.5
+        });
+      });
+      
+      member.addEventListener('mouseleave', () => {
+        gsap.to(member.querySelector('img'), { 
+          rotation: 0,
+          duration: 0.5
+        });
+      });
+    });
+
+    // Add ripple effect to buttons
+    const buttons = document.querySelectorAll('.button, .book-link');
+    buttons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        const x = e.clientX - e.target.getBoundingClientRect().left;
+        const y = e.clientY - e.target.getBoundingClientRect().top;
+        
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>
