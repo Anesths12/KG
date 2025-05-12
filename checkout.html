@@ -6,99 +6,212 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
   <style>
+    :root {
+      --primary: #2a52be;
+      --success: #28a745;
+      --dark: #343a40;
+    }
     body {
-      background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+      background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%) !important; /* Επέστρεψα το ωραίο gradient */
       font-family: 'Raleway', sans-serif;
-      padding: 60px 20px;
-      overflow-x: hidden;
+      min-height: 100vh;
+      padding: 40px 20px;
     }
     .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 15px 60px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.15);
       border-radius: 24px;
-      padding: 50px 40px;
-      animation: fadeInSlide 1.2s ease-in-out;
+      padding: 50px;
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.3);
+      animation: fadeInSlide 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
     h2 {
       font-weight: 800;
       font-size: 2.8rem;
       text-align: center;
-      margin-bottom: 35px;
-      color: #222;
+      margin-bottom: 40px;
+      color: var(--dark);
+      position: relative;
+    }
+    h2:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      margin: 15px auto 0;
+      border-radius: 2px;
     }
     .form-label {
       font-weight: 600;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #555;
     }
     .form-control {
-      padding: 14px;
+      padding: 15px;
       font-size: 1.1rem;
-      border-radius: 14px;
-      transition: 0.3s ease;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+      transition: all 0.3s ease;
     }
     .form-control:focus {
-      border-color: #5cb85c;
-      box-shadow: 0 0 0 4px rgba(92, 184, 92, 0.3);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(42, 82, 190, 0.15);
     }
     .payment-option {
-      background: #f1f1f1;
-      padding: 14px 18px;
+      background: #f8f9fa;
+      padding: 18px 20px;
       border-radius: 14px;
-      border: 2px solid transparent;
+      border: 2px solid #e0e0e0;
       transition: all 0.3s ease;
       cursor: pointer;
       font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
     }
-    .payment-option:hover,
-    .payment-option input:checked + label {
-      border-color: #50c878;
-      background-color: #eaffea;
+    .payment-option.active {
+      border-color: var(--primary);
+      background-color: #f0f5ff;
+    }
+    .payment-icon {
+      font-size: 1.8rem;
+      margin-right: 15px;
+      color: var(--primary);
     }
     .btn-success {
       font-size: 1.25rem;
+      font-weight: 600;
       border-radius: 14px;
-      padding: 14px 30px;
-      background: linear-gradient(135deg, #81C408, #5cb85c);
-      box-shadow: 0 6px 20px rgba(129, 196, 8, 0.5);
-      transition: all 0.3s ease;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, #4e73df, #2a52be);
+      border: none;
+      box-shadow: 0 8px 25px rgba(42, 82, 190, 0.3);
+      transition: all 0.4s ease;
+      letter-spacing: 0.5px;
     }
     .btn-success:hover {
-      background: linear-gradient(135deg, #6ca506, #4a943f);
-      transform: scale(1.03);
+      background: linear-gradient(135deg, #3b5bdb, #1a3a9b);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(42, 82, 190, 0.4);
+    }
+    .btn-outline-secondary {
+      border-radius: 14px;
+      padding: 16px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .card-details {
+      display: none;
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 10px;
+      border: 2px solid #e0e0e0;
+      animation: fadeIn 0.5s ease-out;
+    }
+    .card-details.show {
+      display: block;
+    }
+    .card-number-group {
+      position: relative;
+    }
+    .card-logos {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 8px;
+    }
+    .card-logos img {
+      height: 24px;
+      filter: grayscale(100%);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    #cardNumber:focus ~ .card-logos img {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+    .input-group-text {
+      background: transparent;
+      border-right: none;
+    }
+    .input-group .form-control {
+      border-left: none;
+    }
+    .cvv-tooltip {
+      cursor: pointer;
+      color: var(--primary);
+      transition: all 0.2s ease;
+    }
+    .cvv-tooltip:hover {
+      color: #1a3a9b;
+    }
+    .secure-payment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+      color: #28a745;
+      font-weight: 600;
+    }
+    .secure-payment i {
+      font-size: 1.5rem;
     }
     .success-animation {
       display: none;
       text-align: center;
-      margin-top: 60px;
-      animation: fadeInSlide 1s ease;
+      margin-top: 40px;
+      animation: fadeInSlide 0.8s ease;
     }
     .success-animation.show {
       display: block;
     }
-    .success-animation i {
-      font-size: 110px;
-      color: #50c878;
-      animation: bounce 1.6s ease-in-out infinite;
+    .success-icon {
+      font-size: 120px;
+      color: var(--success);
+      margin-bottom: 20px;
+      animation: bounce 1.8s ease infinite;
     }
     @keyframes fadeInSlide {
-      from {opacity: 0; transform: translateY(40px);}
-      to {opacity: 1; transform: translateY(0);}
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-15px); }
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .glass-card {
+        padding: 30px 20px;
+      }
+      h2 {
+        font-size: 2.2rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="glass-card mx-auto" style="max-width: 800px;">
-      <h2>Ολοκλήρωση Παραγγελείας!</h2>
+    <div class="glass-card">
+      <h2>Ολοκλήρωση Παραγγελείας</h2>
       <form id="checkoutForm">
-        <div class="row g-3">
+        <div class="row g-4">
+          <!-- Personal Info -->
           <div class="col-md-6">
             <label for="firstName" class="form-label">Όνομα *</label>
             <input type="text" class="form-control" id="firstName" required>
@@ -124,51 +237,229 @@
             <input type="text" class="form-control" id="city" required>
           </div>
           <div class="col-md-6">
-            <label for="zip" class="form-label">Τ.Κ. *</label>
+            <label for="zip" class="form-label">Ταχυδρομικός Κώδικας *</label>
             <input type="text" class="form-control" id="zip" required>
           </div>
           <div class="col-12">
-            <label for="notes" class="form-label">Σχόλια</label>
-            <textarea class="form-control" id="notes" rows="3"></textarea>
+            <label for="notes" class="form-label">Σχόλια Παραγγελίας</label>
+            <textarea class="form-control" id="notes" rows="3" placeholder="Προαιρετικά σχόλια..."></textarea>
           </div>
-          <div class="col-12">
-            <label class="form-label">Τρόπος Πληρωμής</label>
-            <div class="form-check mb-2 payment-option">
-              <input class="form-check-input" type="radio" name="payment" id="card" value="card" required>
-              <label class="form-check-label" for="card">💳 Κάρτα</label>
+
+          <!-- Payment Method -->
+          <div class="col-12 mt-3">
+            <h5 class="mb-4" style="font-weight: 700; color: var(--dark);">Τρόπος Πληρωμής</h5>
+            
+            <!-- Credit Card Option -->
+            <div class="form-check p-0">
+              <input class="form-check-input d-none" type="radio" name="payment" id="card" value="card">
+              <label class="payment-option" for="card" id="cardLabel">
+                <span class="payment-icon"><i class="far fa-credit-card"></i></span>
+                <span>Πληρωμή με Κάρτα</span>
+              </label>
             </div>
-            <div class="form-check mb-2 payment-option">
-              <input class="form-check-input" type="radio" name="payment" id="cod" value="cod">
-              <label class="form-check-label" for="cod">🚚 Αντικαταβολή</label>
+            
+            <!-- Card Details -->
+            <div class="card-details" id="cardDetails">
+              <div class="row g-3">
+                <div class="col-12 card-number-group">
+                  <label for="cardNumber" class="form-label">Αριθμός Κάρτας *</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="far fa-credit-card"></i></span>
+                    <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    <div class="card-logos">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" alt="Visa" title="Visa">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" alt="Mastercard" title="Mastercard">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="cardName" class="form-label">Όνομα στην Κάρτα *</label>
+                  <input type="text" class="form-control" id="cardName" placeholder="Όπως εμφανίζεται στην κάρτα">
+                </div>
+                <div class="col-md-3">
+                  <label for="cardExpiry" class="form-label">Ημερομηνία Λήξης *</label>
+                  <input type="text" class="form-control" id="cardExpiry" placeholder="MM/ΕΕ" maxlength="5">
+                </div>
+                <div class="col-md-3">
+                  <label for="cardCvv" class="form-label">CVV *</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control" id="cardCvv" placeholder="•••" maxlength="4">
+                    <span class="input-group-text cvv-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Ο 3-4ψήφιος κωδικός ασφαλείας στο πίσω μέρος της κάρτας">
+                      <i class="fas fa-info-circle"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="secure-payment">
+                <i class="fas fa-lock"></i>
+                <span>Ασφαλής Πληρωμή με Κρυπτογράφηση SSL</span>
+              </div>
             </div>
-            <div class="form-check mb-2 payment-option">
-              <input class="form-check-input" type="radio" name="payment" id="paypal" value="paypal">
-              <label class="form-check-label" for="paypal">🅿️ PayPal</label>
+            
+            <!-- Cash on Delivery Option -->
+            <div class="form-check p-0">
+              <input class="form-check-input d-none" type="radio" name="payment" id="cod" value="cod" checked>
+              <label class="payment-option active" for="cod" id="codLabel">
+                <span class="payment-icon"><i class="fas fa-truck"></i></span>
+                <span>Αντικαταβολή</span>
+              </label>
+            </div>
+
+            <!-- COD Info -->
+            <div id="codInfo" class="mt-3 p-4 bg-light rounded" style="display: block;">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle me-3" style="font-size: 1.5rem; color: var(--primary);"></i>
+                <div>
+                  <h6 class="mb-1" style="font-weight: 600;">Πληροφορίες Αντικαταβολής</h6>
+                  <p class="mb-0">Θα πληρώσετε το ποσό κατά την παράδοση. Προστίθεται χρέωση 2€ για τα μεταφορικά.</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-4">
-          <a href="cart.html" class="btn btn-outline-secondary">← Επιστροφή</a>
-          <button type="submit" class="btn btn-success">Ολοκλήρωση Παραγγελείας</button>
+
+          <!-- Submit Button -->
+          <div class="col-12 mt-5">
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="cart.html" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Επιστροφή
+              </a>
+              <button type="submit" class="btn btn-success">
+                <i class="fas fa-lock me-2"></i>Ολοκλήρωση Παραγγελίας
+              </button>
+            </div>
+          </div>
         </div>
       </form>
+
+      <!-- Success Message -->
       <div class="success-animation" id="successMessage">
-        <i class="fas fa-rocket"></i>
-        <h3 class="mt-3">Η παραγγελία σου είναι έτοιμοι!</h3>
-        <p>Σε ευχαριστούμε για την εμπιστοσύνη 💚</p>
-        <a href="Eshop.html" class="btn btn-primary mt-3">Επιστροφή στην Αρχική</a>
+        <div class="success-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 class="mb-3">Η παραγγελία σας ολοκληρώθηκε!</h3>
+        <p class="lead">Θα λάβετε email επιβεβαίωσης σε λίγα λεπτά.</p>
+        <p>Αριθμός Παραγγελίας: <strong>#GR-<span id="orderNumber"></span></strong></p>
+        <a href="Eshop.html" class="btn btn-primary mt-4 px-5 py-3">
+          <i class="fas fa-home me-2"></i>Επιστροφή στην Αρχική
+        </a>
       </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const form = document.getElementById("checkoutForm");
-    const successMsg = document.getElementById("successMessage");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      localStorage.removeItem("cart");
-      form.style.display = "none";
-      successMsg.classList.add("show");
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize tooltips
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+
+      // Payment method toggle
+      const cardOption = document.getElementById('card');
+      const codOption = document.getElementById('cod');
+      const cardLabel = document.getElementById('cardLabel');
+      const codLabel = document.getElementById('codLabel');
+      const cardDetails = document.getElementById('cardDetails');
+      const codInfo = document.getElementById('codInfo');
+
+      function togglePaymentMethod() {
+        if (cardOption.checked) {
+          cardLabel.classList.add('active');
+          codLabel.classList.remove('active');
+          cardDetails.classList.add('show');
+          codInfo.style.display = 'none';
+        } else {
+          cardLabel.classList.remove('active');
+          codLabel.classList.add('active');
+          cardDetails.classList.remove('show');
+          codInfo.style.display = 'block';
+        }
+      }
+
+      // Set COD as default
+      codOption.checked = true;
+      togglePaymentMethod();
+
+      cardOption.addEventListener('change', togglePaymentMethod);
+      codOption.addEventListener('change', togglePaymentMethod);
+
+      // Format card number (add spaces every 4 digits)
+      const cardNumber = document.getElementById('cardNumber');
+      cardNumber.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\s+/g, '');
+        if (value.length > 0) {
+          value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+        }
+        e.target.value = value;
+        
+        // Highlight card type
+        const cardLogos = document.querySelectorAll('.card-logos img');
+        const firstDigit = value.charAt(0);
+        
+        cardLogos.forEach(logo => {
+          logo.style.filter = 'grayscale(100%)';
+          logo.style.opacity = '0.7';
+        });
+        
+        if (/^4/.test(value)) {
+          document.querySelector('.card-logos img[alt="Visa"]').style.filter = 'grayscale(0%)';
+          document.querySelector('.card-logos img[alt="Visa"]').style.opacity = '1';
+        } else if (/^5[1-5]/.test(value)) {
+          document.querySelector('.card-logos img[alt="Mastercard"]').style.filter = 'grayscale(0%)';
+          document.querySelector('.card-logos img[alt="Mastercard"]').style.opacity = '1';
+        }
+      });
+
+      // Format expiry date (MM/YY)
+      const cardExpiry = document.getElementById('cardExpiry');
+      cardExpiry.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 2) {
+          value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value;
+      });
+
+      // CVV toggle visibility
+      const cardCvv = document.getElementById('cardCvv');
+      const cvvTooltip = document.querySelector('.cvv-tooltip');
+      
+      cvvTooltip.addEventListener('click', function() {
+        if (cardCvv.type === 'password') {
+          cardCvv.type = 'text';
+          setTimeout(() => {
+            cardCvv.type = 'password';
+          }, 2000);
+        }
+      });
+
+      // Form submission
+      const form = document.getElementById('checkoutForm');
+      const successMsg = document.getElementById('successMessage');
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Generate random order number
+        const orderNumber = Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('orderNumber').textContent = orderNumber;
+        
+        // Simulate processing
+        form.style.opacity = '0.5';
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Επεξεργασία...';
+        submitBtn.disabled = true;
+        
+        // Show success after delay
+        setTimeout(() => {
+          form.style.display = 'none';
+          successMsg.classList.add('show');
+          
+          // Clear cart
+          localStorage.removeItem('cart');
+        }, 1500);
+      });
     });
   </script>
 </body>
