@@ -275,7 +275,7 @@ header .container {
       hyphens: none; /* Επίτηδες απενεργοποιημένο για ελληνικά */
       font-size: 75px;                 /* πιο μικρό ώστε να χωρέσει */
       color: white;
-      margin-top: 80px;
+      margin-top: 160px;
       padding: 0 4px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     
@@ -288,8 +288,8 @@ header .container {
     }
     .hero-content {
       max-width: 1000px;
-      margin-left: 0;
-      margin-right: auto;
+      margin-left: auto;   /* Σπρώχνει το πλαίσιο δεξιά */
+      margin-right: 2400px; /* Σταθερή απόσταση 100px από δεξιά */
       text-align: left;
     }
     .hero-title {
@@ -321,95 +321,409 @@ header .container {
     z-index: -1;
 }
 
-.team {
+
+/* ENHANCED ABOUT SECTION */
+.about {
+  position: relative;
   z-index: 1;
-  background-position: center;
-  background-size: cover;
-  padding: 750px 0 110px;
+  padding: 250px 0 150px;
   text-align: center;
+  overflow: hidden;
+}
+
+/* MAIN CONTAINER STYLE */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* TITLE STYLES */
+.about-top .section-title {
+  font-size: 4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+  margin-bottom: 40px;
+  text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(6, 182, 212, 0.5);
+  position: relative;
+  display: inline-block;
+}
+
+.about-top .section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(90deg, #06b6d4, #3ca0ff);
+  border-radius: 2px;
+}
+
+/* CARDS GRID */
+.about-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-bottom: 100px;
+}
+
+.about-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 50px 30px;
+  border-radius: 20px;
+  box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 
+      0 15px 40px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #06b6d4, #3ca0ff);
+}
+
+.card-icon {
+  color: #06b6d4;
+  font-size: 60px;
+  margin-bottom: 25px;
+  transition: transform 0.3s;
+}
+
+.about-card:hover .card-icon {
+  transform: scale(1.1);
+}
+
+.about-card .card-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #028090;
+  margin-bottom: 20px;
+}
+
+.about-card .card-text {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* WIDE HORIZONTAL BOX WITH CENTERED TEXT */
+.about-bottom-content {
+  background: linear-gradient(145deg, 
+             rgba(6, 182, 212, 0.9) 0%, 
+             rgba(2, 128, 144, 0.95) 100%);
+  border-radius: 50px;
+  padding: 60px 120px; /* Πιο μεγάλο padding στα πλάγια */
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 20px 40px rgba(0, 100, 150, 0.4),
+    inset 0 0 25px rgba(255, 255, 255, 0.2);
+  max-width: 1200px; /* Μεγαλύτερο πλάτος */
+  margin: 0 auto;
+  text-align: center;
+  /* Οριζόντια διάταξη */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: auto; /* Αφαίρεση σταθερού ύψους */
+}
+
+/* ΚΕΝΤΡΑΡΙΣΜΑ ΚΕΙΜΕΝΩΝ */
+.about-bottom-content .section-title {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.about-bottom-content .section-text {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: white;
+  text-align: center;
+  max-width: 900px; /* Πιο φαρδύ κείμενο */
+  margin: 0 auto;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+/* ΔΙΑΚΟΣΜΗΤΙΚΑ ΣΤΟΙΧΕΙΑ */
+.about-bottom-content::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    transparent 70%
+  );
+  animation: rotate 20s linear infinite;
+  z-index: -1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .about-bottom-content {
+    padding: 50px 80px;
+    max-width: 90%;
+  }
 }
 
 @media (max-width: 768px) {
-  .team {
-    padding: 150px 0 80px;
+  .about-bottom-content {
+    padding: 40px 30px;
+    border-radius: 30px;
+  }
+  
+  .about-bottom-content .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .about-bottom-content .section-text {
+    font-size: 1.3rem;
   }
 }
-/*ABOUT*/                       /*Ενότητα παρουσίασης της αποστολής/πληροφορίας με gradient background και κεντραρισμένο περιεχόμενο.*/
 
-.about {
-      position: relative;             /*     με λιγα λογια το backround πισω απο τις καρτες  */
-    z-index: 1;
-    background: url('') no-repeat;    /*τωρα το εβγαλα οποτε αμα θελετε το αφηνουμε ετσι */      /*EDO ALLAZO TO BACKROUND EIKONAS */
-    background-position: center;
-    background-size: cover;
-    padding: 200px 0 110px;
-    text-align: center;
-}
-#about {
-  scroll-margin-top: -100px;
-}
-    .about .h2 { color: var(--white); }
-
-.about-top { margin-bottom: 120px; }          /*Αποσταση*/
-    .about-top .section-title { margin-bottom: 20px; }
-    .about-top .section-text { color: var(--white); font-size: var(--fs-4); margin-bottom: 60px; }
-
-.about-list { display: grid; grid-template-columns: 1fr; gap: 30px; }
-.about-card { background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 2px 4px hsla(0, 0%, 0%, .1); }        /*Οι κάρτες είναι λευκές, με στρογγυλεμένες γωνίες και σκιά για να ξεχωρίζουν στο background.*/
-    .about-card .card-title { margin-bottom: 15px; }
-    .about-card .card-text { color: var(--davys-gray); }
-
-.card-icon {                            /*Το εικονίδιο πάνω από κάθε κάρτα έχει μεγάλο μέγεθος και έντονο χρώμα.*/
-    color: var(--bittersweet);
-    font-size: 45px;
-    width: max-content;
-    margin-inline: auto;
-    margin-bottom: 15px;
+@media (max-width: 480px) {
+  .about-bottom-content {
+    padding: 30px 20px;
+  }
+  
+  .about-bottom-content .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .about-bottom-content .section-text {
+    font-size: 1.1rem;
+  }
 }
 
-.about-bottom-banner { 
-  margin-bottom: 120px; }
-    .about-bottom-banner img { 
-      width: 100%;
-       height: 100%; }
 
-.about-bottom .section-title { margin-bottom: 20px; }
-.about-bottom .section-text { color: var(--white); font-size: var(--fs-4); margin-bottom: 40px; }
-.about-bottom .btn-secondary { color: var(--white); margin-inline: auto; }
 
-/*FEATURES*/                                /*Ενότητα με υπηρεσίες/λειτουργίες της σελίδας, ευδιάκριτη με padding.*/
 
-.features { 
-  padding: 80px 0;  
-  text-align: center; 
-  margin-top: 250px; /* Σωστή γραμμή για μετακίνηση προς τα κάτω */
+
+ /* feautures */ 
+
+ 
+ .features-ultra-placeholder {
+  height: 900px;
+  position: relative;
+  overflow: hidden; /* Για τα εφέ που ξεπερνούν τα όρια */
 }
-    .features .section-title { 
-      color: varvar(--white);
-      margin-bottom: 20px; }
-    .features .section-text { 
-      color: var(--rythm); 
-      font-size: var(--fs-4); 
-      margin-bottom: 120px; }
 
-.features-item:first-child { margin-bottom: 100px; }            /*Οι κάρτες στοιχίζονται οριζόντια σε μεγάλες οθόνες με απόσταση μεταξύ τους.*/
-.features-item-banner { max-width: 350px; margin-inline:
-   auto; margin-bottom: 60px; }
-    .features-item-banner img { width: 100%; }                  /*Οι εικόνες των καρτών πιάνουν όλο το διαθέσιμο πλάτος.*/
-.features-item .item-title {var(--white); 
-  margin-bottom: 20px; }
-.features-item .item-text { var(--white);
-  font-size: var(--fs-4); }
-
-/* ΤΙ ΠΡΟΣΦΕΡΟΥΜΕ — ΛΕΥΚΑ ΓΡΑΜΜΑΤΑ */
-#features {
-  scroll-margin-top: 50px; }
-#features .section-title,
-#features .item-title,
-#features .section-text,
-#features .item-text {
-  color: var(--white);
+.features-ultra-box {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  background: #ffffff;
+  border: 2px solid #028090;
+  border-left: none;
+  border-radius: 0 100px 100px 0;
+  padding: 80px 120px;
+  width: 90%;
+  max-width: 1600px;
+  margin: 0;
+  box-shadow:
+    0 10px 30px rgba(0, 128, 144, 0.1),
+    inset 0 0 20px rgba(2, 128, 144, 0.05);
+  background-image:
+    linear-gradient(to right,
+      rgba(255,255,255,1) 0%,
+      rgba(241, 248, 246, 0.9) 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.03"><path d="M20,50 Q35,20 50,50 T80,50" stroke="%23028090" fill="none" stroke-width="2"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  font-family: 'Poppins', sans-serif;
 }
+
+/* Τίτλος "Γιατί κάθε σταγόνα μετράει" */
+.features-ultra-box::before {
+  content: "Γιατί κάθε σταγόνα μετράει";
+  display: block;
+  font-size: clamp(3.6rem, 6vw, 5rem);
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  color: transparent;
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+  text-align: left;
+  width: fit-content;
+
+  background: linear-gradient(90deg, #06b6d4, #2eb7ca, #75b7b1);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  border-bottom: 8px solid;
+  border-image: linear-gradient(to right, #06b6d4, #028090, #50ada5) 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Εφέ Εξαγωγής Δεξιά */
+.features-ultra-box::after {
+  content: "";
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle, 
+    rgba(2, 128, 144, 0.08) 0%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.features-ultra-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  color: #004d40;
+  line-height: 2;
+  text-align: left;
+  padding: 0 20px;
+  width: 100%;
+  max-width: unset;
+  margin: 0 auto;
+}
+/* Ανιχνευτής Κίνησης (Hover Effects) */
+.features-ultra-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 15px 40px rgba(0, 128, 144, 0.2),
+    inset 0 0 30px rgba(2, 128, 144, 0.1);
+  transition: all 0.4s ease;
+}
+
+/* Responsive Ρυθμίσεις */
+@media (max-width: 1200px) {
+  .features-ultra-box::after {
+    right: -30px;
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-ultra-box {
+    width: 95%;
+    padding: 40px 30px;
+    border-radius: 0 50px 50px 0;
+    
+    &::after {
+      display: none; /* Αφαίρεση εφέ σε κινητά */
+    }
+  }
+}
+
+/*κουτια */
+/* ΚΟΥΤΙΑ ΜΕ ΕΙΚΟΝΑ & ΚΕΙΜΕΝΟ */
+.feature-item-content {
+  border-radius: 30px;
+  padding: 60px 50px;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1000px;
+  text-align: left;
+  box-shadow:
+    0 15px 30px rgba(0, 150, 136, 0.25),
+    inset 0 0 20px rgba(0, 150, 136, 0.05);
+  position: relative;
+  z-index: 1;
+  border: none;
+
+  background-image:
+    linear-gradient(135deg, #e0f7fa, #ffffff),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100" opacity="0.02"><path d="M10,10 L90,10 L90,90 L10,90 Z" stroke="%23028090" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item-content:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 25px 50px rgba(0, 150, 136, 0.35),
+    inset 0 0 25px rgba(0, 150, 136, 0.07);
+}
+
+/* ΤΙΤΛΟΣ - ΚΕΝΤΡΟ & ΠΛΗΡΗ ΣΤΟΙΧΙΣΗ */
+.item-title {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 700;
+  color: #00695c;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+.feature-item-content::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 160%;
+  height: 160%;
+  
+  z-index: 0;
+  animation: floatPulse 10s ease-in-out infinite;
+}
+
+
+/* ΚΕΙΜΕΝΟ - JUSTIFY & ΚΕΝΤΡΟ */
+.item-text {
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  color: #333;
+  line-height: 1.8;
+  text-align: justify;       /* Πλήρης στοίχιση */
+  text-align-last: center;   /* Τελευταία γραμμή κεντραρισμένη */
+  word-break: normal;        /* Φυσιολογική αναδίπλωση */
+  overflow-wrap: break-word; /* Σπάει μόνο αν χρειάζεται */
+  hyphens: none;             /* Χωρίς αυτόματο συλλαβισμό */
+  padding: 0 2rem;           /* Πιο πλατύ padding */
+  max-width: 900px;          /* Ευρύτερο πλαίσιο */
+  margin: 0 auto;            /* Κεντράρισμα */
+}
+
+.features :is(.section-title .section-text) { max-width: 650px; margin-inline: auto; }
+.features-item { display: flex; align-items: center; gap: 50px; }
+    .features-item:last-child { flex-direction: row-reverse; }
+.features-item-banner { margin-inline: 0; margin-bottom: 0; }
+.feature-item-content { width: 50%; text-align: left; }
 
 
 /* Συνδρομές */ 
@@ -465,42 +779,7 @@ header .container {
       opacity: 0.8;
     }
     
-    .features {
-      padding: 25px;
-    }
-    
-    .features ul {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .features li {
-      padding: 10px 0;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .features li:last-child {
-      border-bottom: none;
-    }
-    
-    .features li:before {
-      content: "✓";
-      color: #6e8efb;
-      font-weight: bold;
-      margin-right: 10px;
-      font-size: 1.2rem;
-    }
-    
-    .features li.disabled {
-      color: #999;
-    }
-    
-    .features li.disabled:before {
-      content: "✗";
-      color: #999;
-    }
+
     
     .btn {
       display: block;
@@ -539,10 +818,6 @@ header .container {
 
 /*CONTACT*/         
 
-.contact { margin-bottom: 120px; } /*Τμήμα επικοινωνίας με κάτω περιθώριο για απόσταση από το footer.*/
-.contact-content { margin-bottom: 50px; }
-.contact-title { color: var(--royal-blue-dark); margin-bottom: 60px; text-align: center; font-weight: var(--fw-500) !important; }
-.contact-banner img { width: 100%; }
 .input-wrapper {
   display: flex;
   flex-direction: column;
@@ -728,8 +1003,8 @@ footer { background: var(--white-2); }      /*Απαλό γκρι φόντο γ�
       margin-top: 145px; 
       display: block;
       position: absolute;
-      top: 50%;
-      right: 80px;
+      top: 60%;
+      left: 2200px;
       transform: translateY(-50%);
       width: 600px;
       height: 600px;
@@ -745,11 +1020,7 @@ footer { background: var(--white-2); }      /*Απαλό γκρι φόντο γ�
     .about-bottom-banner { margin-bottom: 0; height: 330px; }
     .about-bottom-content { padding-inline: 0; width: 50%; }
 
-    .features :is(.section-title .section-text) { max-width: 650px; margin-inline: auto; }
-    .features-item { display: flex; align-items: center; gap: 50px; }
-        .features-item:last-child { flex-direction: row-reverse; }
-    .features-item-banner { margin-inline: 0; margin-bottom: 0; }
-    .feature-item-content { width: 50%; text-align: left; }
+   
 
     .cta-card > * {max-width: 500px; margin-inline: auto; }
 
@@ -1069,7 +1340,7 @@ footer { background: var(--white-2); }      /*Απαλό γκρι φόντο γ�
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     flex: 1 1 45%;     /* ή 60-70% αν θες λιγότερο */
     min-width: 300px;     /*το μεγεθος του σχηματος κατα μηκος */
-    max-width: 700px;   /* μεγαλώνεις το μεγεθος */
+    max-width: 700px;   /* μεγαλώνει το μεγεθος */
   }
   
   .contact-card h3 {
@@ -1439,7 +1710,7 @@ img {
   display: flex;
   flex-direction: row; /* Κάρτες δίπλα-δίπλα */
   flex-wrap: wrap; /* Επιτρέπει στις κάρτες να τυλίγονται σε νέα γραμμή αν δεν χωράνε */
-  justify-content: flex-start; /* Ευθυγράμμιση των καρτών προς τα αριστερά */
+  justify-content: center; /* Ευθυγράμμιση των καρτών προς τα αριστερά */
   gap: 40px; /* Κενό ανάμεσα στις κάρτες */
   padding: 1px 20px;
   height: 25vh; /* Πλήρης ύψος για την οθόνη */
@@ -1643,21 +1914,26 @@ height: 600px;
 
   /* Η ομαδα μας */ 
 
+
+
+
+  
   .team-section {
     padding: 100px 20px;
     text-align: center;
     position: relative;
     display: flow-root; /* Αυτό διορθώνει τα collapsing margins */
+
   }
   
   .team-section h2 {
-    margin-top: 200px !important; /* !important για σιγουριά */
+    margin-top: 100px !important; /* !important για σιγουριά */
     font-family: 'Playfair Display', serif;
     font-size: 4.5rem;
     font-weight: 700;
     color: #ffffff;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     line-height: 1.2;
     text-align: center;
     display: block;
@@ -1724,7 +2000,7 @@ height: 600px;
   padding: 100px 20px;
   text-align: center;
   position: relative;
-  margin-top: 500px;
+  margin-top: 900px;                            /* για να πανε πιο κατω */
 }
 
 /* Αριστερό Πλαίσιο */
@@ -1746,7 +2022,7 @@ height: 600px;
 
   /* Διάταξη */
   background: linear-gradient(145deg, #3ca0ff, #06b6d4);
-  width: 480px;
+  width: 600px;
   min-height: 550px;
   padding: 50px;
   border-radius: 30px;
@@ -1754,7 +2030,7 @@ height: 600px;
     0 20px 40px rgba(0, 100, 200, 0.4),
     inset 0 0 25px rgba(255, 255, 255, 0.2);
   position: absolute;
-  left: 5%;
+  left: 15%;                                                                /*το ποσο αριστερα ειναι το πλαισιο */ 
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
@@ -1822,6 +2098,7 @@ height: 600px;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   
+  
   /* ΣΤΟΙΧΙΣΗ - ΙΔΙΑ ΜΕ ΤΟ ΑΡΙΣΤΕΡΟ ΠΛΑΙΣΙΟ */
   text-align: justify;
   text-justify: inter-word;
@@ -1830,7 +2107,7 @@ height: 600px;
 
   /* ΔΙΑΤΑΞΗ - ΒΕΛΤΙΩΜΕΝΕΣ ΤΙΜΕΣ */
   background: linear-gradient(145deg, #3ca0ff, #06b6d4);
-  width: 480px; /* ΙΔΙΟ ΠΛΑΤΟΣ ΜΕ ΤΟ ΑΡΙΣΤΕΡΟ */
+  width: 600px; /* ΙΔΙΟ ΠΛΑΤΟΣ ΜΕ ΤΟ ΑΡΙΣΤΕΡΟ */
   min-height: 550px; /* ΙΔΙΟ ΥΨΟΣ */
   padding: 50px; /* ΙΔΙΟ PADDING */
   border-radius: 30px; /* ΙΔΙΟ BORDER-RADIUS */
@@ -1838,7 +2115,7 @@ height: 600px;
     0 20px 40px rgba(0, 100, 200, 0.4),
     inset 0 0 25px rgba(255, 255, 255, 0.2);
   position: absolute;
-  right: 5%; /* ΜΟΝΟ ΑΥΤΟ ΑΛΛΑΖΕΙ */
+  right: 15%;                                                                                                                                        /* ΜΟΝΟ ΑΥΤΟ ΑΛΛΑΖΕΙ */
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
