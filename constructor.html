@@ -335,134 +335,175 @@
     }
     
     <style>
+
   /* Βιβλιογραφία Section */
-  .bibliography-section {
-    padding: 4rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
   
-  .section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-  }
-  
-  .section-subtitle {
-    font-size: 1.5rem;
-    color: #00d4ff;
-    margin-bottom: 1rem;
-    font-weight: 400;
-  }
-  
-  .divider {
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(to right, #090979, #00d4ff);
-    margin: 1rem auto;
-    border-radius: 3px;
-  }
-  
-  .section-description {
-    font-size: 1.1rem;
-    color: #d1d1ff;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  
-  .books-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  
+ /* Βιβλιογραφία Section - ΠΟΛΥ ΜΕΓΑΛΑ ΠΛΑΙΣΙΑ */
+.bibliography-section {
+  padding: 6rem 2rem;
+  max-width: 1600px; /* Ακόμα πιο ευρύ container */
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.section-title {
+  font-size: 3rem; /* Τεράστιος τίτλος */
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-weight: 900;
+}
+
+.section-subtitle {
+  font-size: 2rem;
+  color: #00d4ff;
+  margin-bottom: 2rem;
+}
+
+.divider {
+  width: 150px;
+  height: 5px;
+  background: linear-gradient(to right, #090979, #00d4ff);
+  margin: 2rem auto;
+}
+
+.section-description {
+  font-size: 1.4rem;
+  color: #d1d1ff;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Books Container - 2 Κάρτες ανά σειρά */
+.books-container {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  padding: 3rem 0;
+}
+
+/* Book Card - Τεράστιες Κάρτες */
+.book-card {
+  width: 600px; /* Διπλάσιο πλάτος */
+  background: rgba(9, 9, 121, 0.5);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid rgba(0, 212, 255, 0.5);
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex; /* Για οριζόντια διάταξη εικόνας & κειμένου */
+}
+
+/* Book Cover - Γιγαντιαία εικόνα */
+.book-cover {
+  width: 50%; /* Μισό της κάρτας */
+  height: auto;
+  overflow: hidden;
+  border-right: 3px solid rgba(0, 212, 255, 0.3);
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Book Info - Δεξιά πλευρά */
+.book-info {
+  width: 50%;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-info h4 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+.author {
+  font-size: 1.5rem;
+  color: #d1d1ff;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.year {
+  font-size: 1.3rem;
+  color: #ff55a8;
+  font-weight: 700;
+}
+
+/* Hover Effects */
+.book-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.7);
+  border-color: var(--space-light);
+}
+
+.book-card:hover .book-cover img {
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1600px) {
   .book-card {
-    width: 250px;
-    background: rgba(9, 9, 121, 0.3);
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    transition: all 0.3s ease;
+    width: 550px;
   }
-  
-  .book-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
-  }
-  
-  .book-cover {
-    height: 180px;
-    overflow: hidden;
-  }
-  
-  .book-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .book-card:hover .book-cover img {
-    transform: scale(1.05);
+}
+
+@media (max-width: 1200px) {
+  .book-card {
+    width: 500px;
   }
   
   .book-info {
-    padding: 1.5rem;
-    text-align: center;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .book-card {
+    width: 100%;
+    max-width: 800px;
+    flex-direction: column; /* Σε μικρές οθόνες: κάθετη διάταξη */
   }
   
-  .book-info h4 {
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
+  .book-cover {
+    width: 100%;
+    height: 350px;
+    border-right: none;
+    border-bottom: 3px solid rgba(0, 212, 255, 0.3);
   }
   
-  .author {
-    font-size: 0.95rem;
-    color: #d1d1ff;
-    font-style: italic;
-    margin-bottom: 0.3rem;
+  .book-info {
+    width: 100%;
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
   }
   
-  .year {
-    font-size: 0.9rem;
-    color: #ff55a8;
-    font-weight: 500;
+  .section-subtitle {
+    font-size: 1.8rem;
   }
   
-  @media (max-width: 768px) {
-    .books-container {
-      gap: 1.5rem;
-    }
-    
-    .book-card {
-      width: 45%;
-      min-width: 200px;
-    }
-    
-    .section-title {
-      font-size: 1.8rem;
-    }
-    
-    .section-subtitle {
-      font-size: 1.3rem;
-    }
+  .book-cover {
+    height: 300px;
   }
-  
-  @media (max-width: 480px) {
-    .book-card {
-      width: 100%;
-      max-width: 300px;
-    }
-  }
+}
 </style>
 </head>
 <body>
@@ -471,47 +512,47 @@
 
   <div class="content">
     <h1 data-aos="fade-up">Γνωρίστε την Ομάδα Μας</h1>
-    <p class="subtitle" data-aos="fade-up" data-aos-delay="100">Το Site Αυτό Κατασκευάστηκε Με Πολύ Αγάπη Απο την Κατερίνη</p>
+    <p class="subtitle" data-aos="fade-up" data-aos-delay="100">Το Site Αυτό Κατασκευάστηκε Με Πολύ Αγάπη Από την Κατερίνη</p>
 
     <div class="team-members">
       <div class="member" data-aos="fade-up" data-aos-delay="200">
         <div class="member-img-container">
           <div class="member-img-border"></div>
-          <img src="https://i.postimg.cc/s2MfP4cX/x6kvw3djx1571.jpg" alt="Άτομο 1, Ιδρυτής και ειδικός ανάπτυξης ιστοσελίδων στην Κατερίνη">
+          <img src="https://i.postimg.cc/QxbV7c9B/2025-05-15-220328.png" alt="Άτομο 1, Ιδρυτής και ειδικός ανάπτυξης ιστοσελίδων στην Κατερίνη">
         </div>
         <h3>Πουλιανίδης Αναστάσιος</h3>
-        <span class="position">οκ</span>
-        <p>οκ</p>
+        <span class="position">"hello word" </span>
+        <p></p>
       </div>
       
       <div class="member" data-aos="fade-up" data-aos-delay="300">
         <div class="member-img-container">
           <div class="member-img-border"></div>
-          <img src="https://i.postimg.cc/8z8XJQYk/team-member2.jpg" alt="Άτομο 2, Σχεδιαστής UX/UI">
+          <img src="https://i.postimg.cc/15KmY6Qp/2025-05-15-222910.png" alt="Άτομο 2, Σχεδιαστής UX/UI">
         </div>
-        <h3>Ευριπίδης Ραγκάτσης</h3>
-        <span class="position">οκ</span>
-        <p>οκ herbaLLLLLLLif</p>
+        <h3>Ραγκάτσης Ευριπίδης </h3>
+        <span class="position">"ΠΕΙΝΑΩ"</span>
+        <p></p>
       </div>
       
       <div class="member" data-aos="fade-up" data-aos-delay="400">
         <div class="member-img-container">
           <div class="member-img-border"></div>
-          <img src="https://i.postimg.cc/3NkYbWPT/team-member3.jpg" alt="Άτομο 3, Ειδικός Ψηφιακού Μάρκετινγκ">
+          <img src="https://i.postimg.cc/B6FYXSvg/2025-05-15-221232.png" alt="Άτομο 3, Ειδικός Ψηφιακού Μάρκετινγκ">
         </div>
-        <h3>Σόνια Ρουσούδη</h3>
-        <span class="position">οκ</span>
-        <p>οκ</p>
+        <h3>Ρουσούδη Σόνια </h3>
+        <span class="position">"Save the world"</span>
+        <p></p>
       </div>
       
       <div class="member" data-aos="fade-up" data-aos-delay="500">
         <div class="member-img-container">
           <div class="member-img-border"></div>
-          <img src="https://i.postimg.cc/8CJ3fK5Z/team-member4.jpg" alt="Άτομο 4, Υπεύθυνος Πωλήσεων">
+          <img src="https://i.postimg.cc/t44fRHG1/2025-05-15-220722.png" alt="Άτομο 4, Υπεύθυνος Πωλήσεων">
         </div>
         <h3>Πόδας Αθανάσιος</h3>
-        <span class="position"></span>
-        <p>oκ</p>
+        <span class="position">"i want to go home"</span>
+        <p></p>
       </div>
     </div>
 
@@ -523,8 +564,8 @@
     </div> -->
 
     <div class="btn-container" data-aos="fade-up" data-aos-delay="700">
-      <button class="button pulse" onclick="window.location.href=" index.htm΄">
-        Επιστροφή στην Αρχική <span class="icon"><i class="fas fa-arrow-right"></i></span>
+      <button class="button pulse" onclick="window.location.href='index.html'">
+                Επιστροφή στην Αρχική <span class="icon"><i class="fas fa-arrow-right"></i></span>
       </button>
     </div> 
     

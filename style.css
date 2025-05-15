@@ -53,7 +53,7 @@ textarea, input {
 html {                            /*Ορίζει τη βασική γραμματοσειρά και smooth scroll για τα anchor links.*/
   font-family: var(--ff-poppins); 
   scroll-behavior: smooth; 
-  scroll-padding-top: 60px;
+  scroll-padding-top: 40px;
 
 }  
  
@@ -282,7 +282,7 @@ header .container {
     }
     .hero .container {
       margin-left: 0;
-      padding-left: 60px;
+      padding-left: 120px;
       padding-right: 0;
       max-width: unset;
     }
@@ -326,7 +326,7 @@ header .container {
 .about {
   position: relative;
   z-index: 1;
-  padding: 250px 0 150px;
+  padding: 150px 0 150px;
   text-align: center;
   overflow: hidden;
 }
@@ -362,7 +362,7 @@ header .container {
   transform: translateX(-50%);
   width: 150px;
   height: 4px;
-  background: linear-gradient(90deg, #06b6d4, #3ca0ff);
+  background: linear-gradient(90deg, #ffffff, #ffffff);
   border-radius: 2px;
 }
 
@@ -557,8 +557,8 @@ header .container {
     inset 0 0 20px rgba(2, 128, 144, 0.05);
   background-image:
     linear-gradient(to right,
-      rgba(255,255,255,1) 0%,
-      rgba(241, 248, 246, 0.9) 100%),
+      rgb(179, 189, 186) 0%,
+      rgba(255, 255, 255, 0.9) 100%),
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.03"><path d="M20,50 Q35,20 50,50 T80,50" stroke="%23028090" fill="none" stroke-width="2"/></svg>');
   background-repeat: no-repeat;
   background-position: right bottom;
@@ -1003,8 +1003,8 @@ footer { background: var(--white-2); }      /*Απαλό γκρι φόντο γ�
       margin-top: 145px; 
       display: block;
       position: absolute;
-      top: 60%;
-      left: 2200px;
+      top: 50%;
+      left: 1200px;
       transform: translateY(-50%);
       width: 600px;
       height: 600px;
@@ -1579,7 +1579,7 @@ img {
 /* Συνδρομες */
 
 #subscriptions {
-  scroll-margin-top: 50px; }
+  scroll-margin-top: 120px; }
 
 
 .sunscriptions {
@@ -1917,6 +1917,10 @@ height: 600px;
 
 
 
+  #team {
+    scroll-margin-top: -400px !important;
+  }
+  
   
   .team-section {
     padding: 100px 20px;
@@ -1927,7 +1931,7 @@ height: 600px;
   }
   
   .team-section h2 {
-    margin-top: 100px !important; /* !important για σιγουριά */
+    margin-top: 90px !important; /* !important για σιγουριά */
     font-family: 'Playfair Display', serif;
     font-size: 4.5rem;
     font-weight: 700;
@@ -1997,10 +2001,10 @@ height: 600px;
 
 
 .team-section {
-  padding: 100px 20px;
+  padding: 600px 200px;
   text-align: center;
   position: relative;
-  margin-top: 900px;                            /* για να πανε πιο κατω */
+  margin-top: 100px;                            /* για να πανε πιο κατω */
 }
 
 /* Αριστερό Πλαίσιο */
@@ -2030,7 +2034,7 @@ height: 600px;
     0 20px 40px rgba(0, 100, 200, 0.4),
     inset 0 0 25px rgba(255, 255, 255, 0.2);
   position: absolute;
-  left: 15%;                                                                /*το ποσο αριστερα ειναι το πλαισιο */ 
+  left: 3%;                                                                /*το ποσο αριστερα ειναι το πλαισιο */ 
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
@@ -2115,7 +2119,7 @@ height: 600px;
     0 20px 40px rgba(0, 100, 200, 0.4),
     inset 0 0 25px rgba(255, 255, 255, 0.2);
   position: absolute;
-  right: 15%;                                                                                                                                        /* ΜΟΝΟ ΑΥΤΟ ΑΛΛΑΖΕΙ */
+  right: 5%;                                                                                             /* ΜΟΝΟ ΑΥΤΟ ΑΛΛΑΖΕΙ */
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
